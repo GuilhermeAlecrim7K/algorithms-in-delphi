@@ -18,7 +18,8 @@ uses
   Vcl.ExtCtrls,
   Algorithms.View.Form.ChildTemplate, 
   Algorithms.View.Styles.Colors,
-  Algorithms.View.Form.SortingAlgorithms, Vcl.Imaging.jpeg;
+  Algorithms.View.Form.SortingAlgorithms,
+  Vcl.Imaging.jpeg;
 
 type
 
@@ -26,22 +27,25 @@ type
     PnlSideMenu: TPanel;
     PnlMain: TPanel;
     BtnTrees: TSpeedButton;
-    BtnGlyphs: TImageList;
+    ImgLstButtons: TImageList;
     BtnSortingAlgorithms: TSpeedButton;
     PnlHeader: TPanel;
     ImgProfilePicture: TImage;
+    BtnSideMenu: TSpeedButton;
     procedure BtnSortingAlgorithmsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnMouseEnter(Sender: TObject);
     procedure BtnMouseLeave(Sender: TObject);
     procedure BtnTreesClick(Sender: TObject);
+    procedure BtnSideMenuClick(Sender: TObject);
   private
     FLastClickedButton: TSpeedButton;
+    FSideMenuExpanded: boolean;
     procedure ApplyStyle;
+    procedure ExpandSideMenu;
+    procedure RetractSideMenu;
     procedure AdjustButtonsStyle(Sender: TSpeedButton);
     procedure SetUpPnlMain(AForm: TFormChildClass; Sender: TSpeedButton);
-  public
-    { Public declarations }
   end;
 
 var
@@ -65,6 +69,33 @@ begin
   PnlMain.Color := COLOR_BACKGROUND;
   PnlHeader.Color := GUN_METAL;
   Self.Font.Color := COLOR_BACKGROUND;
+  RetractSideMenu;
+end;
+
+procedure TFormMain.BtnSideMenuClick(Sender: TObject);
+begin
+  if FSideMenuExpanded then
+    RetractSideMenu
+  else
+    ExpandSideMenu;
+end;
+
+procedure TFormMain.ExpandSideMenu;
+const
+  EXPANDED_SIDEPANEL_WIDTH = 226;
+begin
+  PnlSideMenu.Width := EXPANDED_SIDEPANEL_WIDTH;
+  FSideMenuExpanded := true;
+end;
+
+procedure TFormMain.RetractSideMenu;
+const
+  RETRACTED_SIDEPANEL_WIDTH = 0;
+  RETRACTED_MENUBUTTON_WIDTH = 50;
+begin
+  PnlSideMenu.Width := RETRACTED_SIDEPANEL_WIDTH;
+  BtnSideMenu.Width := RETRACTED_MENUBUTTON_WIDTH;
+  FSideMenuExpanded := false;
 end;
 
 procedure TFormMain.BtnSortingAlgorithmsClick(Sender: TObject);
@@ -75,7 +106,6 @@ end;
 procedure TFormMain.BtnTreesClick(Sender: TObject);
 begin
   //SetUpPnlMain(TFormTrees, TSpeedButton(Sender));
-  SetUpPnlMain(TFormChildTemplate, TSpeedButton(Sender));
 end;
 
 procedure TFormMain.BtnMouseEnter(Sender: TObject);
@@ -106,6 +136,7 @@ procedure TFormMain.FormCreate(Sender: TObject);
 begin
   ReportMemoryLeaksOnShutdown := True;
   ApplyStyle;
+  BtnTrees.Enabled := False;
 end;
 
 procedure TFormMain.SetUpPnlMain(AForm: TFormChildClass; Sender: TSpeedButton);
