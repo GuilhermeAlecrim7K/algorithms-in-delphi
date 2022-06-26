@@ -16,8 +16,9 @@ uses
   Vcl.ExtCtrls;
 
 type
-  TFormChildTemplate = class(TForm)
+  TFormChildTemplate = class abstract(TForm)
   public
+    procedure ApplyStyle; virtual; abstract;
     class procedure CreateInto(Parent: TPanel);
   end;
 
@@ -41,6 +42,7 @@ begin
   FormChildTemplate.Color := Parent.Color;
   FormChildTemplate.BorderStyle := bsNone;
   FormChildTemplate.Visible := True;
+  FormChildTemplate.ApplyStyle;
 end;
 
 end.
