@@ -3,49 +3,59 @@
 interface
 
 uses
-  Winapi.Windows, 
-  Winapi.Messages, 
-  System.SysUtils, 
-  System.Variants, 
+  Algorithms.View.Form.ChildTemplate, 
+  Algorithms.View.Form.SortingAlgorithms,
+  Algorithms.View.Styles.Colors,
+
   System.Classes, 
   System.ImageList, 
-  Vcl.ImgList,
-  Vcl.Graphics,
-  Vcl.Controls, 
-  Vcl.Forms, 
-  Vcl.Dialogs, 
+  System.SysUtils, 
+  System.Variants, 
+
   Vcl.Buttons, 
+  Vcl.Controls, 
+  Vcl.Dialogs, 
   Vcl.ExtCtrls,
-  Algorithms.View.Form.ChildTemplate, 
-  Algorithms.View.Styles.Colors,
-  Algorithms.View.Form.SortingAlgorithms,
-  Vcl.Imaging.jpeg;
+  Vcl.Forms, 
+  Vcl.Graphics,
+  Vcl.Imaging.jpeg,
+  Vcl.ImgList,
+
+  Winapi.Messages, 
+  Winapi.Windows, Vcl.Imaging.pngimage;
 
 type
 
   TFormMain = class(TForm)
     PnlSideMenu: TPanel;
     PnlMain: TPanel;
-    BtnTrees: TSpeedButton;
     ImgLstButtons: TImageList;
-    BtnSortingAlgorithms: TSpeedButton;
+    BtnHome: TSpeedButton;
     PnlHeader: TPanel;
     ImgProfilePicture: TImage;
     BtnSideMenu: TSpeedButton;
-    procedure BtnSortingAlgorithmsClick(Sender: TObject);
+    BtnDataStructures: TSpeedButton;
+    BtnSQL: TSpeedButton;
+    BtnAPIIntegration: TSpeedButton;
+    BtnSettings: TSpeedButton;
+    procedure BtnHomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnMouseEnter(Sender: TObject);
     procedure BtnMouseLeave(Sender: TObject);
-    procedure BtnTreesClick(Sender: TObject);
+    procedure BtnDataStructuresClick(Sender: TObject);
     procedure BtnSideMenuClick(Sender: TObject);
   private
     FLastClickedButton: TSpeedButton;
     FSideMenuExpanded: boolean;
     procedure ApplyStyle;
     procedure ExpandSideMenu;
+    procedure FillBtnsCaptions;
     procedure RetractSideMenu;
+    procedure ClearBtnsCaptions;
     procedure AdjustButtonsStyle(Sender: TSpeedButton);
     procedure SetUpPnlMain(AForm: TFormChildClass; Sender: TSpeedButton);
+  private const
+    FBtnsCaptions: array [0..4] of string = ('Home', 'Data structures', 'SQL', 'API Integration', 'Settings');
   end;
 
 var
@@ -66,9 +76,10 @@ end;
 procedure TFormMain.ApplyStyle;
 begin
   PnlSideMenu.Color := COLOR_MENU_BACKGROUND;
-  PnlMain.Color := COLOR_BACKGROUND;
-  PnlHeader.Color := GUN_METAL;
-  Self.Font.Color := COLOR_BACKGROUND;
+  PnlMain.Color := COLOR_PANEL_BACKGROUND;
+  PnlHeader.Color := COLOR_MENU_BACKGROUND;
+  Self.Font.Name := 'Segoe UI';
+  Self.Font.Color := COLOR_PANEL_BACKGROUND;
   RetractSideMenu;
 end;
 
@@ -82,28 +93,60 @@ end;
 
 procedure TFormMain.ExpandSideMenu;
 const
-  EXPANDED_SIDEPANEL_WIDTH = 226;
+  EXPANDED_SIDEPANEL_WIDTH = 120;
 begin
   PnlSideMenu.Width := EXPANDED_SIDEPANEL_WIDTH;
   FSideMenuExpanded := true;
+  FillBtnsCaptions;
+end;
+
+procedure TFormMain.FillBtnsCaptions;
+var
+  I: Integer;
+  Button: TSpeedButton;
+begin
+  for I := 0 to PnlSideMenu.ControlCount - 1 do
+  begin
+    if PnlSideMenu.Controls[I] is TSpeedButton then
+    begin
+      Button := TSpeedButton(PnlSideMenu.Controls[I]);
+      Button.Caption := FBtnsCaptions[I];
+    end;
+  end;
 end;
 
 procedure TFormMain.RetractSideMenu;
 const
-  RETRACTED_SIDEPANEL_WIDTH = 0;
+  RETRACTED_SIDEPANEL_WIDTH = 70;
   RETRACTED_MENUBUTTON_WIDTH = 50;
 begin
   PnlSideMenu.Width := RETRACTED_SIDEPANEL_WIDTH;
   BtnSideMenu.Width := RETRACTED_MENUBUTTON_WIDTH;
   FSideMenuExpanded := false;
+  ClearBtnsCaptions;
 end;
 
-procedure TFormMain.BtnSortingAlgorithmsClick(Sender: TObject);
+procedure TFormMain.ClearBtnsCaptions;
+var
+  I: Integer;
+  Button: TSpeedButton;
+begin
+  for I := 0 to PnlSideMenu.ControlCount - 1 do
+  begin
+    if PnlSideMenu.Controls[I] is TSpeedButton then
+    begin
+      Button := TSpeedButton(PnlSideMenu.Controls[I]);
+      Button.Caption := EmptyStr;
+    end;
+  end;
+end;
+
+procedure TFormMain.BtnHomeClick(Sender: TObject);
 begin
   SetUpPnlMain(TFormSortingAlgorithms, TSpeedButton(Sender));
 end;
 
-procedure TFormMain.BtnTreesClick(Sender: TObject);
+procedure TFormMain.BtnDataStructuresClick(Sender: TObject);
 begin
   //SetUpPnlMain(TFormTrees, TSpeedButton(Sender));
 end;
@@ -115,7 +158,7 @@ begin
   Btn := TSpeedButton(Sender);
   if not Btn.Down then
   begin
-    Btn.Font.Color := COLOR_MENU_BACKGROUND;
+    Btn.Font.Color := GUN_METAL;
     Btn.ImageIndex := Btn.SelectedImageIndex;
   end;
 end;
@@ -127,7 +170,7 @@ begin
   Btn := TSpeedButton(Sender);
   if not Btn.Down then
   begin
-    Btn.Font.Color := COLOR_BACKGROUND;
+    Btn.Font.Color := COLOR_PANEL_BACKGROUND;
     Btn.ImageIndex := Btn.DisabledImageIndex;
   end;
 end;
@@ -136,7 +179,6 @@ procedure TFormMain.FormCreate(Sender: TObject);
 begin
   ReportMemoryLeaksOnShutdown := True;
   ApplyStyle;
-  BtnTrees.Enabled := False;
 end;
 
 procedure TFormMain.SetUpPnlMain(AForm: TFormChildClass; Sender: TSpeedButton);
