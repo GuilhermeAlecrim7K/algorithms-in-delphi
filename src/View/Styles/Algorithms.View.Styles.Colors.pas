@@ -1,0 +1,20 @@
+﻿unit Algorithms.View.Styles.Colors;
+
+interface
+
+const
+
+  //Project colors
+  GUN_METAL = $00413229;
+  YALE_BLUE = $007E481F;
+  COLUMBIA_BLUE = $00FFE8CC;
+  BEAU_BLUE = $00EBDECE;
+  CG_BLUE = $00A28212;
+
+  COLOR_MENU_BACKGROUND = YALE_BLUE;
+  COLOR_PANEL_BACKGROUND = COLUMBIA_BLUE;
+  COLOR_INNER_MENU_BACKGROUND = GUN_METAL;
+
+implementation
+
+end.
