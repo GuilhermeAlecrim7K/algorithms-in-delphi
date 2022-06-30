@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "VMEvURZd8JzNiswHJUkJ1otoE69lZ9uOZhliRjNUjT2x7nyBKu8OtWCW15BrTxNy2f+Tt7RJeUEJ76T7UtvZ5g==",
+  "success": true,
+  "projectFilePath": "E:\\yuri\\projetos\\delphi\\algorithms-in-delphi\\brainiac\\brainiac-api\\brainiac-api\\brainiac-api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yurisanford\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
