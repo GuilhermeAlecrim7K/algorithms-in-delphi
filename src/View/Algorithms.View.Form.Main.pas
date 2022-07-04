@@ -4,7 +4,7 @@ interface
 
 uses
   Algorithms.View.Form.ChildTemplate, 
-  Algorithms.View.Form.SortingAlgorithms,
+  Algorithms.View.Form.DataStructures,
   Algorithms.View.Styles.Colors,
 
   System.Classes, 
@@ -19,10 +19,11 @@ uses
   Vcl.Forms, 
   Vcl.Graphics,
   Vcl.Imaging.jpeg,
+  Vcl.Imaging.pngimage,
   Vcl.ImgList,
 
   Winapi.Messages, 
-  Winapi.Windows, Vcl.Imaging.pngimage;
+  Winapi.Windows;
 
 type
 
@@ -65,22 +66,30 @@ implementation
 
 {$R *.dfm}
 
+uses Algorithms.View.Styles.Fonts;
+
 procedure TFormMain.AdjustButtonsStyle(Sender: TSpeedButton);
 begin
   if Assigned(FLastClickedButton) then
-    FLastClickedButton.OnMouseLeave(FLastClickedButton);
-  Sender.OnMouseEnter(Sender);
+    BtnMouseLeave(FLastClickedButton);
+  BtnMouseEnter(Sender);
   FLastClickedButton := Sender;
 end;
 
 procedure TFormMain.ApplyStyle;
+const
+  MENU_BUTTON_WIDTH = 50;
 begin
+  Self.WindowState := wsMaximized;
   PnlSideMenu.Color := COLOR_MENU_BACKGROUND;
   PnlMain.Color := COLOR_PANEL_BACKGROUND;
   PnlHeader.Color := COLOR_MENU_BACKGROUND;
-  Self.Font.Name := 'Segoe UI';
+  Self.Font.Name := MAIN_FONT_NAME;
+  Self.Font.Size := MAIN_FONT_SIZE;
   Self.Font.Color := COLOR_PANEL_BACKGROUND;
+  BtnSideMenu.Width := MENU_BUTTON_WIDTH;
   RetractSideMenu;
+  BtnHome.Click;
 end;
 
 procedure TFormMain.BtnSideMenuClick(Sender: TObject);
@@ -93,11 +102,11 @@ end;
 
 procedure TFormMain.ExpandSideMenu;
 const
-  EXPANDED_SIDEPANEL_WIDTH = 120;
+  EXPANDED_SIDEPANEL_WIDTH = 200;
 begin
+  FillBtnsCaptions;
   PnlSideMenu.Width := EXPANDED_SIDEPANEL_WIDTH;
   FSideMenuExpanded := true;
-  FillBtnsCaptions;
 end;
 
 procedure TFormMain.FillBtnsCaptions;
@@ -117,11 +126,9 @@ end;
 
 procedure TFormMain.RetractSideMenu;
 const
-  RETRACTED_SIDEPANEL_WIDTH = 70;
-  RETRACTED_MENUBUTTON_WIDTH = 50;
+  SAFE_DISTANCE = 15;
 begin
-  PnlSideMenu.Width := RETRACTED_SIDEPANEL_WIDTH;
-  BtnSideMenu.Width := RETRACTED_MENUBUTTON_WIDTH;
+  PnlSideMenu.Width := BtnSideMenu.Left + BtnSideMenu.Width + SAFE_DISTANCE;
   FSideMenuExpanded := false;
   ClearBtnsCaptions;
 end;
@@ -143,12 +150,12 @@ end;
 
 procedure TFormMain.BtnHomeClick(Sender: TObject);
 begin
-  SetUpPnlMain(TFormSortingAlgorithms, TSpeedButton(Sender));
+//  SetUpPnlMain(TFormHome, TSpeedButton(Sender));
 end;
 
 procedure TFormMain.BtnDataStructuresClick(Sender: TObject);
 begin
-  //SetUpPnlMain(TFormTrees, TSpeedButton(Sender));
+  SetUpPnlMain(TFormDataStructures, TSpeedButton(Sender));
 end;
 
 procedure TFormMain.BtnMouseEnter(Sender: TObject);
@@ -156,11 +163,8 @@ var
   Btn: TSpeedButton;
 begin
   Btn := TSpeedButton(Sender);
-  if not Btn.Down then
-  begin
-    Btn.Font.Color := GUN_METAL;
-    Btn.ImageIndex := Btn.SelectedImageIndex;
-  end;
+  Btn.Font.Color := CG_BLUE;
+  Btn.Font.Style := [fsBold];
 end;
 
 procedure TFormMain.BtnMouseLeave(Sender: TObject);
@@ -168,10 +172,11 @@ var
   Btn: TSpeedButton;
 begin
   Btn := TSpeedButton(Sender);
+  Btn.Font.Style := [fsBold];
   if not Btn.Down then
   begin
     Btn.Font.Color := COLOR_PANEL_BACKGROUND;
-    Btn.ImageIndex := Btn.DisabledImageIndex;
+    Btn.Font.Style := [];
   end;
 end;
 
