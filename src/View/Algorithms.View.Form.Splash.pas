@@ -1,36 +1,23 @@
-﻿unit Algorithms.View.Form.Splash;
+﻿ unit Algorithms.View.Form.Splash;
 
 interface
 
 uses
-  Algorithms.Controller.Application,
-
-  System.Classes,
-  System.SysUtils,
-  System.Variants,
-  
-  Vcl.Controls,
-  Vcl.Dialogs,
-  Vcl.ExtCtrls,
-  Vcl.Forms,
-  Vcl.Graphics,
-  Vcl.Imaging.pngimage,
-
-  Winapi.Messages,
-  Winapi.Windows;
+  Algorithms.Controller.Application, System.Classes, System.SysUtils, System.Variants, Vcl.Controls,
+  Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Forms, Vcl.Graphics, Vcl.Imaging.pngimage, Winapi.Messages, Winapi.Windows;
 
 type
   TFormSplash = class(TForm)
     PnlSplashImage: TPanel;
     ImgSplash: TImage;
-    procedure OnTimer(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     FTimer: TTimer;
     procedure ApplyStyle;
     procedure SetUpTimer(AInterval: integer);
+    procedure OnTimer(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   end;
 
 var
@@ -57,9 +44,12 @@ begin
 end;
 
 procedure TFormSplash.OnTimer(Sender: TObject);
+var
+  Interval: integer
 begin
+  Interval := 1000;
   if not ApplicationController.FinishedLoading then
-    SetUpTimer(1000)
+    SetUpTimer(Interval)
   else
     Self.Close;
 end;
@@ -76,8 +66,11 @@ begin
 end;
 
 procedure TFormSplash.FormShow(Sender: TObject);
+var
+  Interval: integer
 begin
-  SetUpTimer(3000);
+  Interval := 3000;
+  SetUpTimer(Interval);
   ApplicationController.LoadApplicationDependencies;
 end;
 

@@ -3,14 +3,9 @@
 interface
 
 uses
-  Algorithms.View.Form.Main,
-
-  System.Classes,
-  
-  Vcl.Forms;
+  Algorithms.View.Form.Main, System.Classes, Vcl.Forms;
 
 type
-
   TApplicationController = class
   private
     FFinishedLoading: boolean;
