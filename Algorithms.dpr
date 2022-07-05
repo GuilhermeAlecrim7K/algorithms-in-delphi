@@ -1,25 +1,18 @@
 ﻿program Algorithms;
 
-{$APPTYPE CONSOLE}
+uses
+  Vcl.Forms,
+  Algorithms.View.Form.Main in 'src\View\Algorithms.View.Form.Main.pas' {FormMain},
+  Algorithms.View.Form.ChildTemplate in 'src\View\Algorithms.View.Form.ChildTemplate.pas' {FormChildTemplate},
+  Algorithms.View.Styles.Colors in 'src\View\Styles\Algorithms.View.Styles.Colors.pas',
+  Algorithms.View.Form.DataStructures in 'src\View\Algorithms.View.Form.DataStructures.pas' {FormDataStructures},
+  Algorithms.View.Styles.Fonts in 'src\View\Styles\Algorithms.View.Styles.Fonts.pas';
 
 {$R *.res}
 
-uses
-  System.SysUtils,
-  uMain in 'uMain.pas',
-  uRunnableInterface in 'uRunnableInterface.pas',
-  uInsertionSortRoutine in 'Routines\uInsertionSortRoutine.pas',
-  uOptions in 'uOptions.pas';
-
-var
-  Application: IRunnable;
-
 begin
-  try
-    Application := TApplication.Create;
-    Application.Run;
-  except
-    on E: Exception do
-      Writeln(E.ClassName, ': ', E.Message);
-  end;
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFormMain, FormMain);
+  Application.Run;
 end.
