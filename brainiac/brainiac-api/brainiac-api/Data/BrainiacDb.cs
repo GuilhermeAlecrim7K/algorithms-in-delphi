@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using brainiac_api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace brainiac_api.Data
 {
@@ -9,6 +10,8 @@ namespace brainiac_api.Data
         {
 
         }
+
+        public DbSet<Usuario> Usuarios;
 
     }
 }
