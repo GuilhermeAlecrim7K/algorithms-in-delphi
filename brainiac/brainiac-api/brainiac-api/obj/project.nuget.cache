@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "M7pDKZO8J1rXZhXgwLyArEIC/7LJ7xkkqMk8m3dQLn9teHbKN4fdMUm2oJaKXPcuhBQ799jHPMTQGrs6FyFOTA==",
+  "dgSpecHash": "7QOtKoUXMPVnFzM0JFyYxBTV3D2k4Pt44V4zD0+2eDhiNoUKPby2qINCzxiFOTMcsEDiqHrbwXHE06dLaiZHNQ==",
   "success": true,
   "projectFilePath": "E:\\yuri\\projetos\\delphi\\algorithms-in-delphi\\brainiac\\brainiac-api\\brainiac-api\\brainiac-api.csproj",
   "expectedPackageFiles": [
@@ -55,7 +55,8 @@
     "C:\\Users\\yurisanford\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\yurisanford\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\yurisanford\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\yurisanford\\.nuget\\packages\\npgsql\\4.1.3\\npgsql.4.1.3.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\npgsql\\6.0.5\\npgsql.6.0.5.nupkg.sha512",
+    "C:\\Users\\yurisanford\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.5\\npgsql.entityframeworkcore.postgresql.6.0.5.nupkg.sha512",
     "C:\\Users\\yurisanford\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\yurisanford\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\yurisanford\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
